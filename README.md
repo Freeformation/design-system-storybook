@@ -1,73 +1,187 @@
-# React + TypeScript + Vite
+# Design System Storybook
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A comprehensive design system built with React, TypeScript, and Storybook. This project implements atomic design principles with a complete set of reusable UI components, design tokens, theme support, and internationalization.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This design system provides:
+- **Component Library**: Organized components following atomic design (atoms, molecules, organisms)
+- **Storybook**: Interactive documentation and component showcase
+- **Design Tokens**: Centralized styling using Style Dictionary (colors, typography, spacing, shadows, breakpoints)
+- **Theme Support**: Light and dark themes with Material-UI integration
+- **Internationalization (i18n)**: Multi-language support (English, Bengali)
+- **Testing**: Unit tests (Vitest), E2E tests (Playwright), accessibility testing
+- **Design Documentation**: Comprehensive MDX documentation for guidelines and component usage
 
-## React Compiler
+## Architecture
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Directory Structure
 
-## Expanding the ESLint configuration
+```
+src/
+├── components/          # Reusable components organized by atomic design
+│   ├── atoms/          # Basic building blocks (Button, Input, etc.)
+│   ├── molecules/      # Component combinations (Form, Card, etc.)
+│   └── organisms/      # Complex component groups (Header, Layout, etc.)
+├── stories/            # Storybook stories and component examples
+├── theme/              # Theme configuration and providers
+│   ├── light.ts        # Light theme definition
+│   ├── dark.ts         # Dark theme definition
+│   ├── muiTheme.ts     # Material-UI theme setup
+│   └── ThemeProvider.tsx # Theme provider component
+├── tokens/             # Design tokens (colors, typography, spacing, etc.)
+├── i18n/               # Internationalization setup
+├── locales/            # Translation files (en, bn)
+├── assets/             # Static assets
+└── __tests__/          # Test files
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+docs/                   # Design system documentation
+├── Guidelines.mdx      # Design guidelines
+├── Atoms.mdx           # Atomic component documentation
+├── Molecules.mdx       # Molecule component documentation
+├── Organisms.mdx       # Organism component documentation
+└── ...
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+storybook-static/      # Built Storybook (generated)
+tests/
+├── e2e/               # Playwright E2E tests
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Design Token System
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Tokens are managed through [Style Dictionary](https://styledictionary.com/):
+- **Configuration**: `style-dictionary.config.json`
+- **Token Definitions**: `src/tokens/*.json`
+  - `colors.json` - Color palette and variants
+  - `typography.json` - Font families, sizes, weights, line heights
+  - `spacing.json` - Margin and padding scales
+  - `shadows.json` - Elevation and shadow definitions
+  - `breakpoints.json` - Responsive design breakpoints
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Theme System
+
+- **Provider-based**: `ThemeProvider.tsx` wraps the app with theme context
+- **Material-UI Integration**: Uses MUI's theming with custom tokens
+- **Dynamic Switching**: Support for light/dark theme toggling
+- Built on top of design tokens for consistency
+
+### Component Organization
+
+- **Atoms**: Primitive components (Button, Text, Icon, etc.)
+- **Molecules**: Simple component compositions (Input + Label, Button Group, etc.)
+- **Organisms**: Complex components (Header, Footer, Navigation, etc.)
+
+## Tech Stack
+
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **Storybook 10** - Component documentation and testing
+- **Material-UI (MUI)** - Component library
+- **Emotion** - CSS-in-JS styling
+- **Style Dictionary** - Design token generation
+- **i18next** - Internationalization
+- **Vitest** - Unit testing
+- **Playwright** - E2E testing
+- **ESLint** - Code linting
+
+## Quick Start
+
+### Prerequisites
+- Node.js 16+
+- npm or yarn
+
+### Installation
+
+```bash
+npm install
+```
+
+### Development
+
+Start the development server:
+```bash
+npm run dev
+```
+
+Start Storybook:
+```bash
+npm run storybook
+```
+
+Build tokens from style dictionary:
+```bash
+npm run tokens:build
+```
+
+### Building
+
+Build the application:
+```bash
+npm run build
+```
+
+Build Storybook for production:
+```bash
+npm run build-storybook
+```
+
+## Testing
+
+### Unit Tests
+```bash
+npm run test:unit
+```
+
+### E2E Tests
+```bash
+npm run test:e2e
+```
+
+### Linting
+```bash
+npm run lint
+```
+
+### Code Formatting
+```bash
+npm run format
+```
+
+## Documentation
+
+- View Storybook documentation locally: `npm run storybook`
+- Read design guidelines in `docs/Guidelines.mdx`
+- Component documentation is co-located with stories in `src/stories/`
+
+## Design Principles
+
+1. **Atomic Design**: Components are organized from simple (atoms) to complex (organisms)
+2. **Token-Driven Styling**: All styling uses centralized design tokens
+3. **Accessibility**: Components follow WCAG guidelines
+4. **Internationalization**: Built-in support for multiple languages
+5. **Theming**: Support for multiple themes (light/dark)
+6. **Type Safety**: Full TypeScript support
+7. **Testability**: Components are thoroughly tested
+
+## Contributing
+
+When adding new components:
+1. Create the component in the appropriate directory (atoms/molecules/organisms)
+2. Add TypeScript types
+3. Create stories in `src/stories/`
+4. Add unit tests in `src/__tests__/`
+5. Update design documentation if needed
+6. Update tokens if new design values are introduced
+
+## Publishing
+
+This design system is versioned using Changesets:
+```bash
+npm run release
+```
+
+For CI/CD integration with Chromatic:
+```bash
+npm run chromatic
 ```
