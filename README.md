@@ -58,11 +58,68 @@ Tokens are managed through [Style Dictionary](https://styledictionary.com/):
   - `shadows.json` - Elevation and shadow definitions
   - `breakpoints.json` - Responsive design breakpoints
 
-### Theme System
+### Multi-Brand Theme System
 
+The design system supports three distinct brands, each with light and dark themes:
+
+#### Supported Brands
+- **Core** - Primary blue brand (default)
+  - Uses primary color palette
+  - Light & Dark modes
+- **Tara** - Green brand variant
+  - Uses success color palette
+  - Light & Dark modes
+- **Premium** - Pink/Secondary brand variant
+  - Uses secondary color palette
+  - Light & Dark modes
+
+#### Theme Structure
+```
+src/theme/
+├── brands/
+│   ├── core/
+│   │   ├── light.ts
+│   │   └── dark.ts
+│   ├── tara/
+│   │   ├── light.ts
+│   │   └── dark.ts
+│   └── premium/
+│       ├── light.ts
+│       └── dark.ts
+├── ThemeProvider.tsx
+├── muiTheme.ts
+└── ...
+```
+
+#### Using Themes in Components
+
+```typescript
+import { useTheme } from './theme/ThemeProvider';
+
+function MyComponent() {
+  const { brand, mode, setBrand, setMode } = useTheme();
+  
+  return (
+    <div>
+      <p>Current Brand: {brand}</p>
+      <p>Current Mode: {mode}</p>
+      
+      <button onClick={() => setBrand('core')}>Core</button>
+      <button onClick={() => setBrand('tara')}>Tara</button>
+      <button onClick={() => setBrand('premium')}>Premium</button>
+      
+      <button onClick={() => setMode('light')}>Light</button>
+      <button onClick={() => setMode('dark')}>Dark</button>
+    </div>
+  );
+}
+```
+
+#### Theme Capabilities
 - **Provider-based**: `ThemeProvider.tsx` wraps the app with theme context
 - **Material-UI Integration**: Uses MUI's theming with custom tokens
-- **Dynamic Switching**: Support for light/dark theme toggling
+- **Dynamic Switching**: Support for brand and light/dark theme toggling at runtime
+- **Backward Compatibility**: Legacy light/dark imports still work (defaults to core brand)
 - Built on top of design tokens for consistency
 
 ### Component Organization
