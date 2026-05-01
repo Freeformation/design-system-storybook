@@ -1,0 +1,58 @@
+{
+  "name": "@freeformation/core",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Design system components, tokens, and theme",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./components": {
+      "import": "./dist/components/index.js",
+      "types": "./dist/components/index.d.ts"
+    },
+    "./tokens": {
+      "import": "./dist/tokens/index.js",
+      "types": "./dist/tokens/index.d.ts"
+    },
+    "./theme": {
+      "import": "./dist/theme/index.js",
+      "types": "./dist/theme/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src",
+    "test": "vitest",
+    "test:unit": "vitest"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.13.1",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^6.0.0",
+    "i18next": "^23.0.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-i18next": "^13.0.0",
+    "style-dictionary": "^3.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.12.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.0.0",
+    "@vitest/coverage-v8": "^4.1.4",
+    "eslint": "^9.39.4",
+    "globals": "^17.4.0",
+    "prettier": "^3.5.0",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.0",
+    "vitest": "^4.1.4"
+  }
+}
+

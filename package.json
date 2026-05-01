@@ -1,59 +1,39 @@
 {
-  "name": "design-system-storybook",
+  "name": "freeformation-monorepo",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "version": "0.0.0",
+  "description": "Design system monorepo using pnpm workspaces",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "tokens:build": "style-dictionary build --config style-dictionary.config.json",
-    "test": "vitest",
-    "test:unit": "vitest",
-    "test:e2e": "playwright test",
-    "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN",
+    "dev": "pnpm --filter @freeformation/storybook storybook",
+    "build": "pnpm -r build",
+    "build:storybook": "pnpm --filter @freeformation/storybook build-storybook",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "test:unit": "pnpm -r test:unit",
+    "format": "prettier --write .",
+    "chromatic": "pnpm --filter @freeformation/storybook chromatic",
+    "changeset": "changeset",
+    "changeset:version": "changeset version",
     "release": "changeset publish",
-    "format": "prettier --write ."
-  },
-  "dependencies": {
-    "@emotion/react": "^11.13.1",
-    "@emotion/styled": "^11.10.6",
-    "@mui/material": "^6.0.0",
-    "i18next": "^23.0.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "react-i18next": "^13.0.0",
-    "style-dictionary": "^3.6.0"
+    "prepare": "husky"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^5.1.2",
-    "@eslint/js": "^9.39.4",
-    "@storybook/addon-a11y": "^10.3.5",
-    "@storybook/addon-docs": "^10.3.5",
-    "@storybook/addon-onboarding": "^10.3.5",
-    "@storybook/addon-vitest": "^10.3.5",
-    "@storybook/react-vite": "^10.3.5",
-    "@types/node": "^24.12.2",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
-    "@vitest/browser-playwright": "^4.1.4",
-    "@vitest/coverage-v8": "^4.1.4",
     "@changesets/cli": "^2.27.0",
-    "eslint": "^9.39.4",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
-    "eslint-plugin-storybook": "^10.3.5",
-    "globals": "^17.4.0",
-    "jsdom": "^29.0.2",
-    "playwright": "^1.59.1",
-    "storybook": "^10.3.5",
-    "typescript": "~6.0.2",
-    "typescript-eslint": "^8.58.0",
-    "vite": "^8.0.4",
-    "vitest": "^4.1.4"
+    "@commitlint/cli": "^20.5.3",
+    "@commitlint/config-conventional": "^20.5.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.5.0"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx,js,jsx}": [
+      "eslint --fix"
+    ],
+    "**/*.{ts,tsx,js,jsx,json,md}": [
+      "prettier --write"
+    ]
   }
 }
+
+

@@ -25,3 +25,9 @@ dist-ssr
 
 *storybook.log
 storybook-static
+
+# Husky
+.husky/_
+
+# Build outputs
+build-output.txt
