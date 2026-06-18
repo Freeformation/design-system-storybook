@@ -17,7 +17,7 @@
     "@storybook/addon-essentials": "^7.0.0",
     "@storybook/addon-docs": "^7.0.0",
     "@storybook/cli": "^7.0.0",
-    "tailwindcss": "^3.4.19",
+    "tailwindcss": "^4.3.0",
     "postcss": "^8.4.0",
     "autoprefixer": "^10.4.0"
   }
